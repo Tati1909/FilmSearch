@@ -39,9 +39,9 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         viewModel.requestLiveData().observe(viewLifecycleOwner) { renderData(it) }
-        viewModel.requestMovies()
+        viewModel.loadMovies()
     }
 
     private fun renderData(screenState: ScreenState) {
@@ -59,14 +59,24 @@ class MainFragment : Fragment() {
                     getString(R.string.error),
                     getString(R.string.reload),
                     {
-                        viewModel.requestMovies()
+                        viewModel.loadMovies()
                     })
             }
         }
     }
 
     private fun openDetailsFragment(movie: Movie) {
-
+//к менеджеру фрагментов обращаемся через activity
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .add(
+                    R.id.container, DetailsFragment.newInstance(Bundle().apply {
+                        putParcelable(DetailsFragment.BUNDLE_EXTRA, movie)
+                    })
+                )
+                .addToBackStack("")
+                .commitAllowingStateLoss()
+        }
     }
 
     companion object {

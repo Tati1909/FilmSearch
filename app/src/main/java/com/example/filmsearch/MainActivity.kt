@@ -2,6 +2,7 @@ package com.example.filmsearch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.filmsearch.presentation.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

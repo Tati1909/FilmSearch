@@ -2,4 +2,7 @@
     <string name="app_name">Film Search</string>
     <string name="top_movies">Top Movies</string>
 
+    <string name="error">Ошибка</string>
+    <string name="reload">Перезагрузить</string>
+
 </resources>

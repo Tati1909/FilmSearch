@@ -1,7 +1,8 @@
 package com.example.filmsearch.api
 
 import com.example.filmsearch.BuildConfig
-import com.example.filmsearch.model.TopMoviesResponse
+import com.example.filmsearch.model.details.DetailsResponse
+import com.example.filmsearch.model.topmovies.TopMoviesResponse
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 private const val BASE_URL = "https://imdb-api.com/"
+
 class RemoteDataSource {
 
     private val retrofit: MoviesService = Retrofit.Builder()
@@ -35,7 +37,18 @@ class RemoteDataSource {
         retrofit.getMovies(BuildConfig.MOVIE_API_KEY).enqueue(callback)
     }
 
+    fun getDetails(
+        callback: Callback<DetailsResponse>,
+        titleId: String
+    ) {
+        retrofit.getDetails(
+            BuildConfig.MOVIE_API_KEY,
+            titleId
+        ).enqueue(callback)
+    }
+
     inner class MovieApiInterceptor : Interceptor {
+
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
             return chain.proceed(chain.request())

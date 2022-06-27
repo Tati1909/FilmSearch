@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.filmsearch.api.RemoteDataSource
-import com.example.filmsearch.model.TopMoviesResponse
+import com.example.filmsearch.model.topmovies.TopMoviesResponse
 import com.example.filmsearch.presentation.ScreenState
 import com.example.filmsearch.repository.movie.Repository
 import com.example.filmsearch.repository.movie.RepositoryImpl
@@ -13,9 +13,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val CORRUPTED_DATA = "Неполные данные"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
+const val SERVER_ERROR = "Ошибка сервера"
+const val CORRUPTED_DATA = "Неполные данные"
+const val REQUEST_ERROR = "Ошибка запроса на сервер"
 
 class MainViewModel(
     private var liveDataToObserve: MutableLiveData<ScreenState> = MutableLiveData(),
@@ -41,6 +41,7 @@ class MainViewModel(
                 }
             )
         }
+
         //проверяем ответ
         private fun checkResponse(serverResponse: TopMoviesResponse): ScreenState {
             val result = serverResponse.items
@@ -57,7 +58,8 @@ class MainViewModel(
                 ScreenState.Error(
                     Throwable(t.message ?: REQUEST_ERROR)
                 )
-            )        }
+            )
+        }
     }
 
     fun requestLiveData(): LiveData<ScreenState> {

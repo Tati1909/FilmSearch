@@ -1,8 +1,17 @@
 package com.example.filmsearch.repository.details
 
-class DetailsRepositoryImpl(): DetailsRepository {
+import com.example.filmsearch.api.RemoteDataSource
+import com.example.filmsearch.model.details.DetailsResponse
+import retrofit2.Callback
 
-    override fun getMovieInfo() {
-        TODO("Not yet implemented")
+class DetailsRepositoryImpl(
+    private val remoteDataSource: RemoteDataSource
+) : DetailsRepository {
+
+    override fun getDetails(
+        callback: Callback<DetailsResponse>,
+        titleId: String
+    ) {
+        remoteDataSource.getDetails(callback, titleId)
     }
 }

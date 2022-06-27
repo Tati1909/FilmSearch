@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.filmsearch.R
 import com.example.filmsearch.databinding.FragmentMainBinding
-import com.example.filmsearch.model.Movie
+import com.example.filmsearch.model.topmovies.Movie
 import com.example.filmsearch.presentation.ScreenState
 import com.example.filmsearch.presentation.details.DetailsFragment
 import com.example.filmsearch.presentation.showSnackBar
@@ -46,9 +46,9 @@ class MainFragment : Fragment() {
 
     private fun renderData(screenState: ScreenState) {
         when (screenState) {
-            is ScreenState.Success -> {
+            is ScreenState.Success<*> -> {
                 binding.progressBar.visibility = View.GONE
-                adapter.setList(screenState.movieData)
+                adapter.setList(screenState.movieData as List<Movie>)
             }
             is ScreenState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE

@@ -1,4 +1,4 @@
-package com.example.filmsearch.model
+package com.example.filmsearch.model.topmovies
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

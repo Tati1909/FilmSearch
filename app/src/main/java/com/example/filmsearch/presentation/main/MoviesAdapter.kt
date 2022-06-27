@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmsearch.R
 import com.example.filmsearch.databinding.ItemMovieBinding
-import com.example.filmsearch.model.Movie
+import com.example.filmsearch.model.topmovies.Movie
 import com.example.filmsearch.presentation.loadPicture
 
 class MoviesAdapter(

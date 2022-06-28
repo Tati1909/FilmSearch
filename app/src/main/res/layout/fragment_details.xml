@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".presentation.details.DetailsFragment">
 
     <TextView
@@ -19,6 +20,7 @@
         tools:text="Star Wars: The Rise of Skywalker" />
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
         android:layout_width="100dp"
         android:layout_height="160dp"
         android:layout_marginStart="16dp"
@@ -28,11 +30,46 @@
         app:srcCompat="@drawable/fortress" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/genres"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="64dp"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.  "/>
+        tools:text="Drama" />
+
+    <TextView
+        android:id="@+id/companies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/genres"
+        android:layout_marginHorizontal="16dp"
+        tools:text="Lorem Ipsum " />
+    <TextView
+        android:id="@+id/directors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/companies"
+        android:layout_marginHorizontal="16dp"
+        tools:text="Lorem Ipsum " />
+
+    <TextView
+        android:id="@+id/plot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/directors"
+        android:layout_marginHorizontal="16dp"
+        tools:text="Plot " />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

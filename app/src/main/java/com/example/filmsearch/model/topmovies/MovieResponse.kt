@@ -1,6 +1,7 @@
-package com.example.filmsearch.model
+package com.example.filmsearch.model.topmovies
 
-data class Movie(
+data class MovieResponse(
+    //@SerializedName("crew")
     val crew: String?,
     val fullTitle: String?,
     val id: String?,
@@ -10,4 +11,5 @@ data class Movie(
     val rank: String?,
     val title: String?,
     val year: String?
-)
+) {
+}

@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.filmsearch.R
 import com.example.filmsearch.databinding.ItemMovieBinding
-import com.example.filmsearch.model.Movie
-import com.example.filmsearch.presentation.showSnackBar
+import com.example.filmsearch.model.topmovies.Movie
+import com.example.filmsearch.presentation.loadPicture
 
 class MoviesAdapter(
     private var onItemClicked: (movie: Movie) -> Unit
@@ -44,7 +44,13 @@ class MoviesAdapter(
         private val binding = ItemMovieBinding.bind(view)
         fun bind(movie: Movie) {
             binding.itemTitle.text = movie.fullTitle.toString()
-            binding.itemRating.progress = movie.imDbRatingCount?.toInt() ?: 0
+            binding.itemRating.progress = movie.imDbRating?.toIntRating() ?: 0
+            movie.image?.let { binding.itemImage.loadPicture(it) }
+            binding.root.setOnClickListener { onItemClicked(movie) }
         }
+    }
+
+    fun String.toIntRating(): Int {
+        return this.toDouble().toInt().times(10)
     }
 }

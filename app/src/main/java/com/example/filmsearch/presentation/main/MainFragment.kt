@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.filmsearch.R
 import com.example.filmsearch.databinding.FragmentMainBinding
-import com.example.filmsearch.model.Movie
+import com.example.filmsearch.model.topmovies.Movie
 import com.example.filmsearch.presentation.ScreenState
 import com.example.filmsearch.presentation.details.DetailsFragment
 import com.example.filmsearch.presentation.showSnackBar
@@ -39,16 +39,16 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         viewModel.requestLiveData().observe(viewLifecycleOwner) { renderData(it) }
-        viewModel.requestMovies()
+        viewModel.loadMovies()
     }
 
     private fun renderData(screenState: ScreenState) {
         when (screenState) {
-            is ScreenState.Success -> {
+            is ScreenState.Success<*> -> {
                 binding.progressBar.visibility = View.GONE
-                adapter.setList(screenState.movieData)
+                adapter.setList(screenState.movieData as List<Movie>)
             }
             is ScreenState.Loading -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -59,14 +59,24 @@ class MainFragment : Fragment() {
                     getString(R.string.error),
                     getString(R.string.reload),
                     {
-                        viewModel.requestMovies()
+                        viewModel.loadMovies()
                     })
             }
         }
     }
 
     private fun openDetailsFragment(movie: Movie) {
-
+//к менеджеру фрагментов обращаемся через activity
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .add(
+                    R.id.container, DetailsFragment.newInstance(Bundle().apply {
+                        putParcelable(DetailsFragment.BUNDLE_EXTRA, movie)
+                    })
+                )
+                .addToBackStack("")
+                .commitAllowingStateLoss()
+        }
     }
 
     companion object {

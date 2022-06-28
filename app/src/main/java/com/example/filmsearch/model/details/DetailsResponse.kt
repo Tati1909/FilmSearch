@@ -21,18 +21,18 @@ data class DetailsResponse(
     fun toDomain(): DetailsMovie = DetailsMovie(
         companies = companies,
         directors = directors,
-        errorMessage,
-        fullTitle,
-        genres,
-        id,
-        imDbRating,
-        image,
-        languages,
-        plot,
-        releaseDate,
-        runtimeMins,
-        stars,
-        writers,
-        year
+        errorMessage = errorMessage,
+        fullTitle = fullTitle,
+        genres = genres,
+        id = id,
+        imDbRating = imDbRating,
+        image = image,
+        languages = languages,
+        plot = plot,
+        releaseDate = releaseDate,
+        runtimeMins = runtimeMins,
+        stars = stars,
+        writers = writers,
+        year = year
     )
 }

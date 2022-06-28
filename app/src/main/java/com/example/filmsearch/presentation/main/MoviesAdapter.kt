@@ -44,9 +44,13 @@ class MoviesAdapter(
         private val binding = ItemMovieBinding.bind(view)
         fun bind(movie: Movie) {
             binding.itemTitle.text = movie.fullTitle.toString()
-            binding.itemRating.progress = movie.imDbRatingCount?.toInt() ?: 0
+            binding.itemRating.progress = movie.imDbRating?.toIntRating() ?: 0
             movie.image?.let { binding.itemImage.loadPicture(it) }
             binding.root.setOnClickListener { onItemClicked(movie) }
         }
+    }
+
+    fun String.toIntRating(): Int {
+        return this.toDouble().toInt().times(10)
     }
 }

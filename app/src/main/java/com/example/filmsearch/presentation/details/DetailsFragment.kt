@@ -1,5 +1,6 @@
 package com.example.filmsearch.presentation.details
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -67,10 +68,14 @@ class DetailsFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDetailsMovie(detailsMovie: DetailsMovie) {
         binding.title.text = detailsMovie.fullTitle
-        binding.info.text = detailsMovie.genres
+        binding.genres.text = "Genres: ${detailsMovie.genres}"
         binding.image.loadPicture(detailsMovie.image)
+        binding.companies.text = "Companies: ${detailsMovie.companies}"
+        binding.directors.text = "Directors: ${detailsMovie.directors}"
+        binding.plot.text = "Plot: ${detailsMovie.plot}"
     }
 
     companion object {
